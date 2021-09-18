@@ -51,9 +51,7 @@ function runQuiz() {
 }
 
 var fetchQuestions = function() {
-    document.getElementsByClassName("populate-questions");
-    populateQuestion.textContent = startQuestions.question;
-    startQuestions.innerHTML = "";
+    document.getElementsByClassName("populate-questions")[0].textContent = startQuestions.question;
 
     for (var i = 0; i < 4; i++) {
         //populates the answers in the buttons
