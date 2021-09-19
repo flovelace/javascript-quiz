@@ -41,6 +41,19 @@ var startQuestions = questionList[index];
 //listeners here
 startButton.addEventListener("click", runQuiz) //runQuiz will be the function to start
 
+//timer function
+
+var timeLeft = 60;
+var quizTimerTimer = setInterval(function(){
+  if(timeLeft <= 0){
+    clearInterval(quizTimerTimer);
+    document.getElementById("time").innerHTML = "Finished";
+  } else {
+    document.getElementById("time").innerHTML = timeLeft + " seconds remaining";
+  }
+  timeLeft -= 1;
+}, 1000);
+
 function runQuiz() {
     console.log('started') //starts the game. confirmed listener working
     startPage.querySelector("#start-page")
@@ -50,7 +63,7 @@ function runQuiz() {
     fetchQuestions();
 }
 
-var fetchQuestions = function() {
+var fetchQuestions = function() { //populates the questions
     document.getElementsByClassName("populate-questions")[0].textContent = startQuestions.question;
 
     for (var i = 0; i < 4; i++) {
@@ -68,7 +81,9 @@ var fetchQuestions = function() {
     };
 }
 
+//check to see that the answer is correct
 var checkAnswer = function() {
-    
-}
+
+  }; 
+
 
