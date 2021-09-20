@@ -36,7 +36,6 @@ var startButton = document.querySelector("#start-quiz-btn");
 var showQuestions = document.querySelector("#questions-page");
 var correctOrWrong = document.querySelector("#correct-or-wrong");
 var populateQuestion = document.getElementsByClassName("populate-questions");
-var startQuestions = questionList[index];
 var timeLeft = 60;
 var quizTimer = setInterval;
 
@@ -66,8 +65,10 @@ function runQuiz() {
 };
 
 var fetchQuestions = function() { //populates the questions
+    var startQuestions = questionList[index];
+    
     document.getElementsByClassName("populate-questions")[0].textContent = startQuestions.question;
-
+    
     for (var i = 0; i < 4; i++) {
         //populates the answers in the buttons
         var populateList = document.createElement("li");
@@ -78,23 +79,27 @@ var fetchQuestions = function() { //populates the questions
         populateButton.textContent = i + 1 + ". " + startQuestions.answers[i];
         populateList.appendChild(populateButton);
         showQuestions.appendChild(populateList);
-    
+
     };
 }
 
 //check to see that the answer is correct
 var checkAnswer = function() {
+
     if (this.value !== questionList[index].correctAnswer) {
         correctOrWrong.textContent = "Wrong!";
         correctOrWrong.setAttribute("class", "populate-correct-or-wrong");
         document.getElementById("time").textContent = timeLeft - 10 + " seconds remaining";
         timeLeft -= 10;
-        
+        index++;
+        fetchQuestions();
+
     } else {
+
         correctOrWrong.textContent = "Correct! Good job!"
         correctOrWrong.setAttribute = ("class", "populate-correct-or-wrong");
+        index++;
+        fetchQuestions();        
     }
 
 };
-
-
