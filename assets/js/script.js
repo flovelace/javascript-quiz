@@ -87,13 +87,12 @@ var checkAnswer = function() {
     if (this.value !== questionList[index].correctAnswer) {
         correctOrWrong.textContent = "Wrong!";
         correctOrWrong.setAttribute("class", "populate-correct-or-wrong");
-        document.getElementById("time").textContent = timeLeft - 10 / 60 + " seconds remaining";
+        document.getElementById("time").textContent = timeLeft - 10 + " seconds remaining";
+        timeLeft -= 10;
         
-
     } else {
         correctOrWrong.textContent = "Correct! Good job!"
         correctOrWrong.setAttribute = ("class", "populate-correct-or-wrong");
-
     }
 
 };
