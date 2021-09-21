@@ -15,8 +15,8 @@ var questionList = [
 
     {
         question: "Which of the following cannot be used with the Math object?",
-        answers: [".round", ".ceil", ".random", ".PIE"],
-        correctAnswer: ".PIE"  
+        answers: ["round", "ceil", "random", "PIE"],
+        correctAnswer: "PIE"  
     },
 
     {
@@ -73,7 +73,7 @@ function runQuiz() {
 };
 
 var fetchQuestions = function() { //populates the questions
-    var startQuestions = questionList[index];
+    const startQuestions = questionList[index];
     
     document.getElementsByClassName("populate-questions")[0].textContent = startQuestions.question;
     
@@ -98,6 +98,9 @@ var checkAnswer = function() {
         correctOrWrong.textContent = "Wrong!";
         correctOrWrong.setAttribute("class", "populate-correct-or-wrong");
         document.getElementById("time").textContent = timeLeft - 10 + " seconds remaining";
+        if (index === questionList.length -1) {
+            endQuiz()
+        } else
         timeLeft -= 10;
         index++;
         clearSection();
@@ -106,11 +109,15 @@ var checkAnswer = function() {
     } else {
         correctOrWrong.textContent = "Correct! Good job!"
         correctOrWrong.setAttribute = ("class", "populate-correct-or-wrong");
-        index++;
-        clearSection();
-        fetchQuestions(); 
+        if(index === questionList.length -1) {
+            endQuiz()
+        } else {
+            index++;
+            clearSection();
+            fetchQuestions();
+        }
+ 
     }
-
 
 };
    
@@ -123,9 +130,9 @@ function clearSection() {
    }
 
    function endQuiz() {
-       index === questionList.length
        clearInterval(quizTimer);
-       correctOrWrong.setAttribute("class", "hide");
+       var clearCorrect = document.getElementById("correct-or-wrong");
+       clearCorrect.innerHTML = "";
        showQuestions.setAttribute("class", "hide");
        endPage.setAttribute("class", "");
 
