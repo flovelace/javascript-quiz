@@ -24,6 +24,12 @@ var questionList = [
         answers: ["+", "--", "**", "~"],
         correctAnswer: "~"  
     },
+
+    {
+        question: "How many scopes does JavaScript Have?",
+        answers: ["Two", "Three", "Four", "Five"],
+        correctAnswer: "Three"  
+    },
 ]
 
 //course stipulates that five questions are required. Will need to add another question
@@ -32,8 +38,10 @@ var questionList = [
 
 var index = 0; //for our questions
 var startPage = document.querySelector("#start-page");
+var endPage = document.querySelector("#ending-page")
 var startButton = document.querySelector("#start-quiz-btn");
 var showQuestions = document.querySelector("#questions-page");
+var answerList = document.getElementById("answer-list")
 var correctOrWrong = document.querySelector("#correct-or-wrong");
 var populateQuestion = document.getElementsByClassName("populate-questions");
 var timeLeft = 60;
@@ -78,28 +86,55 @@ var fetchQuestions = function() { //populates the questions
         populateButton.addEventListener ("click", checkAnswer);
         populateButton.textContent = i + 1 + ". " + startQuestions.answers[i];
         populateList.appendChild(populateButton);
-        showQuestions.appendChild(populateList);
+        answerList.appendChild(populateList);
 
     };
 }
 
 //check to see that the answer is correct
 var checkAnswer = function() {
-
+   correctOrWrong.removeAttribute("class", "hide");
     if (this.value !== questionList[index].correctAnswer) {
         correctOrWrong.textContent = "Wrong!";
         correctOrWrong.setAttribute("class", "populate-correct-or-wrong");
         document.getElementById("time").textContent = timeLeft - 10 + " seconds remaining";
         timeLeft -= 10;
         index++;
+        clearSection();
         fetchQuestions();
 
     } else {
-
         correctOrWrong.textContent = "Correct! Good job!"
         correctOrWrong.setAttribute = ("class", "populate-correct-or-wrong");
         index++;
-        fetchQuestions();        
+        clearSection();
+        fetchQuestions(); 
     }
 
+
 };
+   
+function clearSection() {
+       var clearTitle = document.querySelector(".populate-questions");
+       var clearChoices = document.getElementById("answer-list");
+       clearTitle.innerHTML = "";
+       clearChoices.innerHTML = "";
+       console.log(clearSection, "clearsection");
+   }
+
+   function endQuiz() {
+       index === questionList.length
+       clearInterval(quizTimer);
+       correctOrWrong.setAttribute("class", "hide");
+       showQuestions.setAttribute("class", "hide");
+       endPage.setAttribute("class", "");
+
+   };
+
+    
+    
+    
+    
+    
+  //  window.location.reload("highscores.html");
+
