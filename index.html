@@ -14,7 +14,7 @@
         <div class="container-fluid">
           <span class="navbar-brand mb-0 h1">JavaScript Quiz</span>
           <span class="navbar-brand mb-0 h1 time" id="time">Time: 0</span>
-          <span class="navbar-brand mb-0 h1 score">High Scores</span>
+          <span class="navbar-brand mb-0 h1 score"><a id="anchor" href="./scoreboard.html">Scoreboard</a></span>
         </div>
     </nav>
     <!--end bootstrap nav bar-->
@@ -43,9 +43,9 @@
         <form>
             <div class="form-group">
               <label for="exampleInputEmail1">Enter your initials.</label>
-              <input type="email" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter your initials here">
+              <input type="text" class="form-control" id="name" placeholder="Enter your initials here">
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" id="submit-button" class="btn btn-primary">Submit</button>
           </form>
     </section>
     

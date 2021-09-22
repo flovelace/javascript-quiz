@@ -46,6 +46,8 @@ var correctOrWrong = document.querySelector("#correct-or-wrong");
 var populateQuestion = document.getElementsByClassName("populate-questions");
 var timeLeft = 60;
 var quizTimer = setInterval;
+var submitButton = document.querySelector("#submit-button");
+var userInitials = document.querySelector("#name")
 
 //listeners here
 startButton.addEventListener("click", runQuiz) //runQuiz will be the function to start
@@ -88,8 +90,8 @@ var fetchQuestions = function() { //populates the questions
         populateList.appendChild(populateButton);
         answerList.appendChild(populateList);
 
-    };
-}
+    }
+};
 
 //check to see that the answer is correct
 var checkAnswer = function() {
@@ -127,7 +129,7 @@ function clearSection() {
        clearTitle.innerHTML = "";
        clearChoices.innerHTML = "";
        console.log(clearSection, "clearsection");
-   }
+   };
 
    function endQuiz() {
        clearInterval(quizTimer);
@@ -138,10 +140,17 @@ function clearSection() {
 
    };
 
-    
-    
-    
-    
-    
-  //  window.location.reload("highscores.html");
+submitButton.addEventListener('click', function(event) {
+    event.preventDefault();
+
+    var endScore = {
+        score: document.getElementById("time").innerText,
+        name: document.getElementById("name").value,
+    }
+
+    // save the user's initials to local storage
+    localStorage.setItem('endScore', JSON.stringify(endScore));
+    window.location.href = "./scoreboard.html";
+
+});
 
