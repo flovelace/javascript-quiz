@@ -47,21 +47,22 @@ var populateQuestion = document.getElementsByClassName("populate-questions");
 var timeLeft = 60;
 var quizTimer = setInterval;
 var submitButton = document.querySelector("#submit-button");
-var userInitials = document.querySelector("#name")
+var userInitials = document.querySelector("#name");
+var showScoreBoard = document.querySelector("#results-page");
 
 //listeners here
 startButton.addEventListener("click", runQuiz) //runQuiz will be the function to start
 
 function runQuiz() {
     console.log('started') //starts the game. confirmed listener working
-    startPage.querySelector("#start-page")
+    startPage.querySelector("#start-page");
     startPage.setAttribute("class", "hide");
     showQuestions.setAttribute("class", "");
 
 //put time inside run quiz function so it starts on click event
     timeLeft = 60;
     quizTimer = setInterval(function(){
-    if (timeLeft <= 0){
+    if (timeLeft <= 0) {
     clearInterval(quizTimer);
     document.getElementById("time").innerHTML = "You ran out of time!";
     endQuiz();
@@ -101,7 +102,7 @@ var checkAnswer = function() {
         correctOrWrong.setAttribute("class", "populate-correct-or-wrong");
         document.getElementById("time").textContent = timeLeft - 10 + " seconds remaining";
         if (index === questionList.length -1) {
-            endQuiz()
+            endQuiz();
         } else
         timeLeft -= 10;
         index++;
@@ -112,7 +113,7 @@ var checkAnswer = function() {
         correctOrWrong.textContent = "Correct! Good job!"
         correctOrWrong.setAttribute = ("class", "populate-correct-or-wrong");
         if(index === questionList.length -1) {
-            endQuiz()
+            endQuiz();
         } else {
             index++;
             clearSection();
@@ -124,11 +125,11 @@ var checkAnswer = function() {
 };
    
 function clearSection() {
-       var clearTitle = document.querySelector(".populate-questions");
+       var clearTitle = document.querySelector(".populate-questions");
        var clearChoices = document.getElementById("answer-list");
-       clearTitle.innerHTML = "";
+       clearTitle.innerHTML = "";
        clearChoices.innerHTML = "";
-       console.log(clearSection, "clearsection");
+       console.log(clearSection, "clearsection");
    };
 
    function endQuiz() {
@@ -140,7 +141,8 @@ function clearSection() {
 
    };
 
-submitButton.addEventListener('click', function(event) {
+  //  window.location.reload("highscores.html");
+  submitButton.addEventListener('click', function(event) {
     event.preventDefault();
 
     var endScore = {
@@ -150,7 +152,31 @@ submitButton.addEventListener('click', function(event) {
 
     // save the user's initials to local storage
     localStorage.setItem('endScore', JSON.stringify(endScore));
-    window.location.href = "./scoreboard.html";
+    endScores();
+
+    //hide all sections except our our scoreboard
+    function endScores() {
+        
+    endPage.remove();
+    startPage.remove();
+    showQuestions.remove();
+    showScoreBoard.querySelector("#results-page");
+    showScoreBoard.setAttribute("class", "");
+
+    var highScore = localStorage.getItem("endScore");
+    highScore = JSON.parse(highScore);
+
+    var displayScore = document.createElement("h1");
+    displayScore.textContent = highScore.name + " had " + highScore.score;
+    showScoreBoard.appendChild(displayScore);
+
+    }
 
 });
+
+
+
+
+
+
 
