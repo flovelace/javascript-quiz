@@ -193,10 +193,9 @@ function clearSection() {
 
             localStorage.clear();
             displayScore.remove();
-        }
-
+            }
          
-    }
+        }
 
     }
 
