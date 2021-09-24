@@ -1,3 +1,49 @@
+body {
+    font-family: yaldevi;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover {
+    color: rgb(183, 0, 255);
+}
+
+#start-page {
+    margin-left: 600px;
+}
+
+#text-decoration {
+    font-weight: bolder;
+    color: rgb(183, 0, 255);
+}
+
+.welcome-message {
+    padding-top: 30px;
+}
+
+.populate-questions {
+    margin-left: 600;
+}
+
+#questions-page {
+    padding-left: 600px;
+    padding-top: 30px;
+
+}
+
+#correct-or-wrong {
+    padding-left: 600px;
+    color: rgb(183, 0, 255);
+    font-weight: bolder;
+}
+
+#answer-list {
+    list-style-type: none;
+}
+
 .btn {
     margin: 5px;
     background-color: black;
@@ -6,11 +52,31 @@
 }
 
 .btn:hover {
-    background-color: white;
-    color: black;
-    opacity: 0.8;
+    background-color: rgb(183, 0, 255);
+    color: white;
+    opacity: 0.6;
 }
 
 .hide {
     display: none;
 }
+
+#ending-page {
+    padding-left: 600px;
+    padding-top: 30px;
+
+}
+
+form {
+    padding-right: 600px;
+}
+
+label {
+    padding-bottom: 10px;
+}
+
+#results-page {
+    padding-left: 600px;
+    padding-top: 30px;
+}
+
