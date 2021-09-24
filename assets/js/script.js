@@ -1,6 +1,14 @@
-//list of questions
+//holding the object from local storage
+let userHistory; 
 
-var questionList = [
+if(localStorage.getItem("endScore")){
+    userHistory = localStorage.getItem("endScore");
+}else{ //if blank empty array
+    localStorage.setItem("endScore",JSON.stringify([]))
+}
+
+//list of questions
+let questionList = [
     {
       question: "Who invented JavaScript?",
       answers: ["Alan Turing", "Ada Lovelace", "Elon Musk", "Brendan Eich"],
@@ -32,8 +40,6 @@ var questionList = [
     },
 ]
 
-//course stipulates that five questions are required. Will need to add another question
-
 //variables global
 
 var index = 0; //for our questions
@@ -47,6 +53,7 @@ var populateQuestion = document.getElementsByClassName("populate-questions");
 var timeLeft = 60;
 var quizTimer = setInterval;
 var submitButton = document.querySelector("#submit-button");
+var clearButton = document.querySelector("#clear-button");
 var userInitials = document.querySelector("#name");
 var showScoreBoard = document.querySelector("#results-page");
 
@@ -77,6 +84,11 @@ function runQuiz() {
 
 var fetchQuestions = function() { //populates the questions
     const startQuestions = questionList[index];
+    
+    if(questionList.length -1 < index){
+           startQuestions=""
+    }
+    
     
     document.getElementsByClassName("populate-questions")[0].textContent = startQuestions.question;
     
@@ -133,6 +145,7 @@ function clearSection() {
    };
 
    function endQuiz() {
+       console.log("hello ")
        clearInterval(quizTimer);
        var clearCorrect = document.getElementById("correct-or-wrong");
        clearCorrect.innerHTML = "";
@@ -141,7 +154,6 @@ function clearSection() {
 
    };
 
-  //  window.location.reload("highscores.html");
   submitButton.addEventListener('click', function(event) {
     event.preventDefault();
 
@@ -151,7 +163,11 @@ function clearSection() {
     }
 
     // save the user's initials to local storage
-    localStorage.setItem('endScore', JSON.stringify(endScore));
+    var highScore = localStorage.getItem("endScore");
+    highScore = JSON.parse(highScore);
+    highScore.push(endScore)
+
+    localStorage.setItem('endScore', JSON.stringify(highScore));
     endScores();
 
     //hide all sections except our our scoreboard
@@ -164,15 +180,30 @@ function clearSection() {
     showScoreBoard.setAttribute("class", "");
 
     var highScore = localStorage.getItem("endScore");
-    highScore = JSON.parse(highScore);
+     highScore = JSON.parse(highScore);
 
-    var displayScore = document.createElement("h1");
-    displayScore.textContent = highScore.name + " had " + highScore.score;
-    showScoreBoard.appendChild(displayScore);
+     for (let i = 0; i < highScore.length; i++) {
+        
+        let displayScore = document.createElement("h1");
+        displayScore.textContent = highScore[i].name + ": " + highScore[i].score;
+        showScoreBoard.appendChild(displayScore);
+        
+        document.getElementById("clear-button").onclick = clearMe;
+        function clearMe(){
+
+            localStorage.clear();
+            displayScore.remove();
+        }
+         
+    }
 
     }
 
 });
+
+
+
+
 
 
 
