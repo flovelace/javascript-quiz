@@ -185,7 +185,7 @@ function clearSection() {
      for (let i = 0; i < highScore.length; i++) {
         
         let displayScore = document.createElement("h1");
-        displayScore.textContent = highScore[i].name + ": " + highScore[i].score;
+        displayScore.textContent = highScore[i].name + " : " + highScore[i].score;
         showScoreBoard.appendChild(displayScore);
         
         document.getElementById("clear-button").onclick = clearMe;
@@ -193,9 +193,9 @@ function clearSection() {
 
             localStorage.clear();
             displayScore.remove();
-            }
-         
         }
+         
+    }
 
     }
 
